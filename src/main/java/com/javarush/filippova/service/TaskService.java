@@ -1,8 +1,8 @@
-package com.javarush.service;
+package com.javarush.filippova.service;
 
-import com.javarush.dao.TaskDAO;
-import com.javarush.entity.Status;
-import com.javarush.entity.Task;
+import com.javarush.filippova.dao.TaskDAO;
+import com.javarush.filippova.entity.Status;
+import com.javarush.filippova.entity.Task;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

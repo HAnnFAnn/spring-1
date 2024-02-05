@@ -1,4 +1,4 @@
-package com.javarush.entity;
+package com.javarush.filippova.entity;
 
 public enum Status {
     IN_PROGRESS,

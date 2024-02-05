@@ -1,7 +1,8 @@
-package com.javarush.config;
+package com.javarush.filippova.config;
 
 import com.zaxxer.hikari.HikariDataSource;
 import jakarta.persistence.EntityManagerFactory;
+
 import org.hibernate.cfg.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +22,7 @@ public class AppConfig {
     public LocalSessionFactoryBean sessionFactoryBean() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("com.javarush.entity");
+        sessionFactory.setPackagesToScan("com.javarush.filippova.entity");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
@@ -29,8 +30,9 @@ public class AppConfig {
     private Properties hibernateProperties() {
         Properties properties = new Properties();
         properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
-        properties.put (Environment.DRIVER, "com.p6spy.engine.spy.P6SpyDriver");
-        properties.put (Environment.HBM2DDL_AUTO, "validate");
+        properties.put(Environment.DRIVER, "com.p6spy.engine.spy.P6SpyDriver");
+        properties.put(Environment.HBM2DDL_AUTO, "validate");
+        properties.put(Environment.SHOW_SQL, true);
         return properties;
     }
 
@@ -46,7 +48,7 @@ public class AppConfig {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager (EntityManagerFactory factory) {
+    public PlatformTransactionManager transactionManager(EntityManagerFactory factory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(factory);
         return transactionManager;

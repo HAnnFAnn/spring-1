@@ -1,6 +1,6 @@
-package com.javarush.controller;
+package com.javarush.filippova.controller;
 
-import com.javarush.entity.Status;
+import com.javarush.filippova.entity.Status;
 
 public class TaskInfo {
     private String description;

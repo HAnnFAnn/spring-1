@@ -1,11 +1,10 @@
-package com.javarush.dao;
+package com.javarush.filippova.dao;
 
-import com.javarush.entity.Task;
+import com.javarush.filippova.entity.Task;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -27,7 +26,7 @@ public class TaskDAO{
     }
 
     public int getAllCount() {
-        Query<Long> query = getSession().createQuery("select count(t) from Task t", Long. class);
+        Query<Long> query = getSession().createQuery("select count(t) from Task t", Long.class);
         return Math.toIntExact(query.uniqueResult());
     }
 

@@ -1,7 +1,7 @@
-package com.javarush.controller;
+package com.javarush.filippova.controller;
 
-import com.javarush.entity.Task;
-import com.javarush.service.TaskService;
+import com.javarush.filippova.entity.Task;
+import com.javarush.filippova.service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public String tasks(Model model,
                         @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                         @RequestParam(value = "limit", required = false, defaultValue = "10") int limit) {
@@ -29,32 +29,34 @@ public class TaskController {
     }
 
     @PostMapping("/{id}")
-    public void edit(Model model,
+    public String edit(Model model,
                      @PathVariable Integer id,
                      @RequestBody TaskInfo info) {
         if (isNull(id) || (id <= 0)) {
             throw new RuntimeException("Invalid id");
         }
         Task task = taskService.edit(id, info.getDescription(), info.getStatus());
+        return tasks(model, 1, 10);
     }
 
-    @PostMapping("/")
-    public void add(
+    @PostMapping
+    public String add(
             Model model,
             @RequestBody TaskInfo info
     ) {
         Task task = taskService.create(info.getDescription(), info.getStatus());
+        return tasks(model, 1, 10);
     }
 
     @DeleteMapping("/{id}")
     public String delete(
             Model model,
-            @PathVariable Integer id
+            @PathVariable("id") Integer id //??
     ) {
         if (isNull(id) || id <= 0) {
             throw new RuntimeException("Invalid id");
         }
         taskService.delete(id);
-        return "tasks";
+        return tasks(model, 1, 10);
     }
 }
