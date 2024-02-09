@@ -19,7 +19,7 @@ import java.util.Properties;
 public class AppConfig {
 
     @Bean
-    public LocalSessionFactoryBean sessionFactoryBean() {
+    public LocalSessionFactoryBean sessionFactoryBean(){
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan("com.javarush.filippova.entity");
@@ -27,12 +27,12 @@ public class AppConfig {
         return sessionFactory;
     }
 
+
     private Properties hibernateProperties() {
         Properties properties = new Properties();
-        properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
+        properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
         properties.put(Environment.DRIVER, "com.p6spy.engine.spy.P6SpyDriver");
         properties.put(Environment.HBM2DDL_AUTO, "validate");
-        properties.put(Environment.SHOW_SQL, true);
         return properties;
     }
 
@@ -40,7 +40,7 @@ public class AppConfig {
     public DataSource dataSource() {
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDriverClassName("com.p6spy.engine.spy.P6SpyDriver");
-        dataSource.setJdbcUrl("jdbc:p6spy:mysql://localhost:3306/todo");
+        dataSource.setJdbcUrl("jdbc:p6spy:mysql://db:3306/todo");
         dataSource.setUsername("root");
         dataSource.setPassword ("root");
         dataSource.setMaximumPoolSize(10);

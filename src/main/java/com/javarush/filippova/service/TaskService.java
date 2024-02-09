@@ -18,7 +18,8 @@ public class TaskService {
         this.taskDAO = taskDAO;
     }
 
-    public List<Task> getAll(int offset, int limit) {
+    public List<Task> getAll(int offset, int limit)
+    {
         return taskDAO.getAll(offset, limit);
     }
 
